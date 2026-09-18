@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    background-color: lightblue;
+    padding: 20px;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+}
+
+/* Sidebar */
+
+aside {
+    width: 220px;
+    background-color: lightgray;
+    padding: 20px;
+    min-height: 500px;
+}
+
+aside p {
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
+
+/* Main Content */
+
+main {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Product Card */
+
+.product-card {
+    width: 300px;
+
+    margin: 20px;
+    padding: 20px;
+    border: 2px solid black;
+
+    text-align: center;
+}
+
+.product-card button {
+    padding: 10px 20px;
+}
+
+/* Blog Layout */
+
+.blog-container {
+    display: flex;
+    gap: 20px;
+}
+
+.blog-card {
+    flex: 1;
+    padding: 20px;
+    border: 2px solid gray;
+    margin: 10px;
+}
+
+/* Mobile Devices */
+
+@media (max-width: 600px) {
+
+    .container {
+        flex-direction: column;
+    }
+
+    aside {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .product-card {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .blog-container {
+        flex-direction: column;
+    }
+
+    .blog-card {
+        margin: 10px 0;
+    }
+}
