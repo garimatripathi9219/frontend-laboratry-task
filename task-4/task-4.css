@@ -1,0 +1,69 @@
+
+body {
+    margin: 0;
+    font-family: Arial;
+}
+
+.nav-link {
+    margin-left: 15px;
+}
+
+.nav-link:hover {
+    color: cyan !important;
+}
+
+.hero {
+    height: 500px;
+    background: linear-gradient(135deg, #05052b, #4b0082);
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 50px;
+}
+
+.hero p {
+    font-size: 20px;
+}
+
+.planet {
+    font-size: 100px;
+    animation: move 3s infinite;
+}
+
+@keyframes move {
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.card {
+    height: 100%;
+    border: none;
+    box-shadow: 0 5px 15px #ccc;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.contact {
+    padding: 70px 20px;
+    background: #eee;
+}
+
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 35px;
+    }
+
+    .planet {
+        font-size: 70px;
+    }
+}
+```
