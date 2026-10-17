@@ -1,0 +1,138 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Eligibility Checker</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: white;
+            color: #222;
+            width: 90%;
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #243b55;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        button {
+            background-color: #243b55;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #141e30;
+            transform: scale(1.05);
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            overflow-wrap: anywhere;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Age Eligibility Checker</h1>
+
+        <p>
+            Check whether you are eligible to vote
+            based on your age.
+        </p>
+
+        <button onclick="checkAge()">Check Eligibility</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function checkAge() {
+
+            // User se age input lena
+            let age = prompt("Enter your age:");
+
+            // Agar user Cancel dabaye
+            if (age === null) {
+                alert("You cancelled the process.");
+                return;
+            }
+
+            age = age.trim();
+
+            // Empty ya invalid input check karna
+            if (age === "" || !Number.isFinite(Number(age))
+                || Number(age) < 0
+                || !Number.isInteger(Number(age))) {
+
+                alert("Please enter a valid age.");
+                document.getElementById("result").innerHTML =
+                    "Invalid age entered.";
+                return;
+            }
+
+            age = Number(age);
+
+            // If-else se eligibility check karna
+            if (age >= 18) {
+                alert("You are eligible to vote!");
+            } else {
+                alert("You are not eligible to vote yet.");
+            }
+
+            // Ternary operator ka use
+            let message = age >= 18
+                ? "You are eligible to vote."
+                : "You are not eligible to vote yet.";
+
+            // Page par result show karna
+            document.getElementById("result").innerHTML =
+                "Your Age: " + age + "<br>" + message;
+
+            // document.write() ka demonstration
+            // Isko uncomment karne par current page replace ho jayega.
+            // document.write("Your age is " + age);
+        }
+    </script>
+
+</body>
+</html>
+```
