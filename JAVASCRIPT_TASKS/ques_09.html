@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+let arr = [10, -5, 0, 20, -8, 0, 15, -2];
+
+let positiveSum = 0;
+let negativeSum = 0;
+let zeroCount = 0;
+
+for (let i = 0; i < arr.length; i++) {
+
+    if (arr[i] > 0) {
+        positiveSum = positiveSum + arr[i];
+    }
+
+    else if (arr[i] < 0) {
+        negativeSum = negativeSum + arr[i];
+    }
+
+    else {
+        zeroCount++;
+    }
+}
+
+console.log("Positive Sum = " + positiveSum);
+console.log("Negative Sum = " + negativeSum);
+console.log("Zero Count = " + zeroCount);
+
+</script>
+</body>
+</html>
