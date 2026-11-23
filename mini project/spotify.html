@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Melody - Music for Everyone</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #090910;
+    color: white;
+    font-family: Arial, sans-serif;
+}
+
+/* Layout */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 245px;
+    background: #11111b;
+    padding: 30px 22px;
+    border-right: 1px solid #292938;
+    position: fixed;
+    height: 100vh;
+}
+
+.logo {
+    font-size: 30px;
+    font-weight: bold;
+    color: #a970ff;
+    margin-bottom: 50px;
+}
+
+.menu p {
+    padding: 15px;
+    margin-bottom: 12px;
+    color: #aaaabe;
+    cursor: pointer;
+    border-radius: 12px;
+    transition: 0.3s;
+}
+
+.menu p:hover,
+.menu .active {
+    background: #29203c;
+    color: white;
+}
+
+.sidebar h3 {
+    color: #77778c;
+    font-size: 13px;
+    margin: 40px 10px 18px;
+    letter-spacing: 2px;
+}
+
+/* Main */
+.main {
+    margin-left: 245px;
+    width: calc(100% - 245px);
+    padding: 30px 40px 150px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.search {
+    background: #191925;
+    border: 1px solid #303044;
+    padding: 13px 20px;
+    border-radius: 30px;
+    color: white;
+    width: 280px;
+    outline: none;
+}
+
+.profile {
+    background: #272038;
+    padding: 12px 20px;
+    border-radius: 30px;
+    color: #c9a5ff;
+}
+
+/* Hero */
+.hero {
+    background: linear-gradient(110deg, #5121a8, #a23b9b, #ed7b92);
+    border-radius: 25px;
+    padding: 45px;
+    min-height: 250px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    overflow: hidden;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-size: 40px;
+    margin: 15px 0;
+}
+
+.hero p {
+    color: #f1dcff;
+    margin-bottom: 25px;
+}
+
+.hero button {
+    background: white;
+    color: #682ca3;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.hero-art {
+    font-size: 110px;
+    margin-right: 45px;
+}
+
+/* Sections */
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.section-title h2 {
+    font-size: 24px;
+}
+
+.section-title span {
+    color: #ae7cff;
+    cursor: pointer;
+}
+
+/* Music Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+    margin-bottom: 45px;
+}
+
+.card {
+    background: #171722;
+    padding: 14px;
+    border-radius: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    min-width: 0;
+}
+
+.card:hover {
+    background: #292439;
+    transform: translateY(-7px);
+}
+
+.cover {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 13px;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+
+.card p {
+    color: #9999aa;
+    font-size: 13px;
+}
+
+/* Player */
+.player {
+    position: fixed;
+    bottom: 0;
+    left: 245px;
+    width: calc(100% - 245px);
+    background: rgba(20, 20, 31, 0.97);
+    border-top: 1px solid #343044;
+    padding: 17px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    backdrop-filter: blur(15px);
+}
+
+.now-playing {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 25%;
+}
+
+.now-playing img {
+    width: 55px;
+    height: 55px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.now-playing p {
+    color: #9999aa;
+    font-size: 13px;
+    margin-top: 5px;
+}
+
+.controls {
+    text-align: center;
+}
+
+.controls button {
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 23px;
+    margin: 0 13px;
+    cursor: pointer;
+}
+
+.controls .play {
+    background: #a970ff;
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+#status {
+    color: #aaa;
+    font-size: 12px;
+    margin-top: 8px;
+}
+
+.volume {
+    width: 20%;
+    text-align: right;
+}
+
+.volume input {
+    width: 90px;
+    accent-color: #a970ff;
+}
+
+@media(max-width: 900px) {
+    .cards {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-art {
+        font-size: 70px;
+        margin-right: 5px;
+    }
+}
+
+@media(max-width: 600px) {
+    .sidebar {
+        width: 75px;
+        padding: 20px 8px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .sidebar h3 {
+        display: none;
+    }
+
+    .menu p {
+        font-size: 0;
+        text-align: center;
+    }
+
+    .menu p::first-letter {
+        font-size: 20px;
+    }
+
+    .main {
+        margin-left: 75px;
+        width: calc(100% - 75px);
+        padding: 20px 15px 130px;
+    }
+
+    .player {
+        left: 75px;
+        width: calc(100% - 75px);
+        padding: 12px;
+    }
+
+    .volume {
+        display: none;
+    }
+
+    .hero {
+        padding: 25px;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    .hero-art {
+        display: none;
+    }
+
+    .now-playing {
+        width: 40%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+
+        <div class="logo">♫ Melody</div>
+
+        <div class="menu">
+            <p class="active">🏠 Home</p>
+            <p>🔍 Search</p>
+            <p>📚 Your Library</p>
+            <p>❤️ Liked Songs</p>
+        </div>
+
+        <h3>YOUR PLAYLISTS</h3>
+
+        <div class="menu">
+            <p>🎧 Chill Vibes</p>
+            <p>🌙 Night Music</p>
+            <p>🔥 Trending</p>
+        </div>
+
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+
+        <div class="topbar">
+            <input
+                class="search"
+                id="search"
+                type="text"
+                placeholder="🔍 Search songs..."
+                oninput="searchSongs()"
+            >
+
+            <div class="profile">👤 My Profile</div>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+
+            <div>
+                <p>WELCOME TO MELODY</p>
+
+                <h1>Music for your soul.</h1>
+
+                <p>Discover music. Feel every beat.</p>
+
+                <button onclick="playSong(0)">▶ Listen Now</button>
+            </div>
+
+            <div class="hero-art">🎧</div>
+
+        </section>
+
+        <!-- Recently Played -->
+        <div class="section-title">
+            <h2>Recently Played</h2>
+            <span>See all →</span>
+        </div>
+
+        <div class="cards" id="recent">
+
+            <div class="card" onclick="playSong(0)">
+                <img class="cover"
+                src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=500"
+                alt="Headphones">
+                <h3>Dream Music</h3>
+                <p>Relax and enjoy</p>
+            </div>
+
+            <div class="card" onclick="playSong(1)">
+                <img class="cover"
+                src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=500"
+                alt="Music studio">
+                <h3>Love Songs</h3>
+                <p>Feel the music</p>
+            </div>
+
+            <div class="card" onclick="playSong(2)">
+                <img class="cover"
+                src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500"
+                alt="Concert">
+                <h3>Chill Beats</h3>
+                <p>Music for your mood</p>
+            </div>
+
+            <div class="card" onclick="playSong(3)">
+                <img class="cover"
+                src="https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=500"
+                alt="Singer">
+                <h3>Acoustic Love</h3>
+                <p>Beautiful melodies</p>
+            </div>
+
+        </div>
+
+        <!-- Made For You -->
+        <div class="section-title">
+            <h2>Made For You</h2>
+            <span>See all →</span>
+        </div>
+
+        <div class="cards">
+
+            <div class="card" onclick="playSong(1)">
+                <img class="cover"
+                src="https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=500"
+                alt="Guitar">
+                <h3>Daily Mix</h3>
+                <p>Your favourite music</p>
+            </div>
+
+            <div class="card" onclick="playSong(2)">
+                <img class="cover"
+                src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=500"
+                alt="Night sky">
+                <h3>Night Vibes</h3>
+                <p>Perfect for late nights</p>
+            </div>
+
+            <div class="card" onclick="playSong(3)">
+                <img class="cover"
+                src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=500"
+                alt="Music festival">
+                <h3>Top Hits</h3>
+                <p>Popular tracks</p>
+            </div>
+
+            <div class="card" onclick="playSong(0)">
+                <img class="cover"
+                src="https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=500"
+                alt="Music">
+                <h3>Focus Music</h3>
+                <p>Stay in your zone</p>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<!-- Music Player -->
+<div class="player">
+
+    <div class="now-playing">
+        <img id="currentImage"
+        src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200"
+        alt="Current song">
+
+        <div>
+            <h4 id="songName">Dream Music</h4>
+            <p>Melody Playlist</p>
+        </div>
+    </div>
+
+    <div class="controls">
+
+        <button onclick="previousSong()">⏮</button>
+
+        <button class="play" id="playButton"
+        onclick="togglePlay()">▶</button>
+
+        <button onclick="nextSong()">⏭</button>
+
+        <p id="status">Ready to play</p>
+
+    </div>
+
+    <div class="volume">
+        🔊
+        <input type="range" min="0" max="1"
+        step="0.1" value="1" id="volume">
+    </div>
+
+</div>
+
+<audio id="audio"></audio>
+
+<script>
+
+// Songs
+let songs = [
+    {
+        name: "Dream Music",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200"
+    },
+    {
+        name: "Love Songs",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
+        image: "https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=200"
+    },
+    {
+        name: "Chill Beats",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
+        image: "https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200"
+    },
+    {
+        name: "Acoustic Love",
+        url: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3",
+        image: "https://images.unsplash.com/photo-1516280440614-37939bbacd81?w=200"
+    }
+];
+
+let currentSong = 0;
+
+let audio = document.getElementById("audio");
+
+function playSong(index) {
+
+    currentSong = index;
+
+    audio.src = songs[currentSong].url;
+
+    document.getElementById("songName").innerText =
+    songs[currentSong].name;
+
+    document.getElementById("currentImage").src =
+    songs[currentSong].image;
+
+    audio.play();
+
+    document.getElementById("playButton").innerText = "⏸";
+
+    document.getElementById("status").innerText =
+    "Now Playing";
+}
+
+function togglePlay() {
+
+    if (audio.src === "") {
+        playSong(0);
+        return;
+    }
+
+    if (audio.paused) {
+        audio.play();
+        document.getElementById("playButton").innerText = "⏸";
+        document.getElementById("status").innerText = "Now Playing";
+    }
+    else {
+        audio.pause();
+        document.getElementById("playButton").innerText = "▶";
+        document.getElementById("status").innerText = "Paused";
+    }
+}
+
+function nextSong() {
+
+    currentSong++;
+
+    if (currentSong >= songs.length) {
+        currentSong = 0;
+    }
+
+    playSong(currentSong);
+}
+
+function previousSong() {
+
+    currentSong--;
+
+    if (currentSong < 0) {
+        currentSong = songs.length - 1;
+    }
+
+    playSong(currentSong);
+}
+
+// Volume
+document.getElementById("volume").addEventListener("input", function() {
+    audio.volume = this.value;
+});
+
+// Automatically play next song
+audio.addEventListener("ended", nextSong);
+
+// Search
+function searchSongs() {
+
+    let value = document.getElementById("search").value.toLowerCase();
+
+    let cards = document.querySelectorAll("#recent .card");
+
+    for (let i = 0; i < cards.length; i++) {
+
+        let name = cards[i].querySelector("h3").innerText.toLowerCase();
+
+        if (name.includes(value)) {
+            cards[i].style.display = "block";
+        }
+        else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
